@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     private bool levelEnded;
     private FadeUI fadeUI;
     private LevelCompleteUI levelCompleteUI;
+    private int currentLevelIndex = 1;
 
     private void Awake()
     {
@@ -42,16 +43,23 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
+        SceneManager.UnloadSceneAsync(currentLevelIndex);
 
-        if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
+        currentLevelIndex++;
+
+        if (currentLevelIndex >= SceneManager.sceneCountInBuildSettings)
         {
             Debug.Log("GAME COMPLETE");
             yield break;
         }
 
-        SceneManager.LoadScene(nextSceneIndex);
+        SceneManager.LoadScene(currentLevelIndex, LoadSceneMode.Additive);
+
+        yield return new WaitForSeconds(0.1f);
+
+        StartCoroutine(fadeUI.FadeIn());
+
+        levelEnded = false;
     }
 
     private IEnumerator RestartLevel()
@@ -60,7 +68,17 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.UnloadSceneAsync(currentLevelIndex);
+
+        yield return new WaitForSeconds(0.1f);
+
+        SceneManager.LoadScene(currentLevelIndex, LoadSceneMode.Additive);
+
+        yield return new WaitForSeconds(0.1f);
+
+        StartCoroutine(fadeUI.FadeIn());
+
+        levelEnded = false;
     }
 
     public void RestartCurrentLevel()
