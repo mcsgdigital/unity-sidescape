@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GridManager gridManager;
+    public AnimationCurve rollCurve;
 
     public float rollSpeed = 4f;
     private Vector3 targetPosition;
@@ -54,13 +55,20 @@ public class PlayerController : MonoBehaviour
         Vector3 axis = Vector3.Cross(Vector3.up,
                         new Vector3(direction.x, 0, direction.y));
 
-        float angle = 0f;
+        float duration = 1f / rollSpeed;
+        float timer = 0f;
+        float previousCurveValue = 0f;
 
-        while (angle < 90f)
+        while (timer < duration)
         {
-            float step = rollSpeed * Time.deltaTime * 90f;
-            transform.RotateAround(pivot, axis, step);
-            angle += step;
+            timer += Time.deltaTime;
+            float progress = Mathf.Clamp01(timer / duration);
+            float curveValue = rollCurve.Evaluate(progress);
+            float deltaCurve = curveValue - previousCurveValue;
+            float angleStep = deltaCurve * 90f;
+            transform.RotateAround(pivot, axis, angleStep);
+            previousCurveValue = curveValue;
+
             yield return null;
         }
 
@@ -137,6 +145,11 @@ public class PlayerController : MonoBehaviour
             tile.RemoveTile();
 
             StartCoroutine(Fall());
+            // CameraShake shake = FindObjectOfType<CameraShake>();
+            // if (shake != null)
+            // {
+            //     shake.Shake();
+            // }
         }
         else
         {
