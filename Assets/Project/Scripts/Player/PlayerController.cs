@@ -7,14 +7,29 @@ public class PlayerController : MonoBehaviour
     public GridManager gridManager;
 
     public float rollSpeed = 4f;
-    private bool isMoving;
     private Vector3 targetPosition;
     private Vector2Int bufferedDirection;
     private bool hasBufferedInput;
 
+    public enum PlayerState
+    {
+        Idle,
+        Rolling,
+        Falling,
+        Dead,
+        Winning
+    }
+
+    private PlayerState currentState;
+
+    private void Awake()
+    {
+        currentState = PlayerState.Idle;
+    }
+
     public void TryMove(Vector2Int direction)
     {
-        if (isMoving)
+        if (currentState != PlayerState.Idle)
         {
             bufferedDirection = direction;
             hasBufferedInput = true;
@@ -28,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Roll(Vector3 targetPos, Vector2Int direction)
     {
-        isMoving = true;
+        currentState = PlayerState.Rolling;
 
         Vector3 pivot = transform.position +
                         (Vector3.down + new Vector3(direction.x, 0, direction.y)) * 0.5f;
@@ -54,17 +69,11 @@ public class PlayerController : MonoBehaviour
         );
 
         HandleTile();
-
-        if (hasBufferedInput)
-        {
-            hasBufferedInput = false;
-            TryMove(bufferedDirection);
-        }
     }
 
     private IEnumerator Fall()
     {
-        isMoving = true;
+        currentState = PlayerState.Falling;
 
         float fallSpeed = 5f;
 
@@ -90,15 +99,18 @@ public class PlayerController : MonoBehaviour
         switch (currentTile.tileType)
         {
             case TileType.Normal:
-                isMoving = false;
+                currentState = PlayerState.Idle;
+                TryConsumeBufferedInput();
                 break;
 
             case TileType.Goal:
                 Debug.Log("LEVEL COMPLETE");
-                isMoving = false;
+                currentState = PlayerState.Winning;
                 break;
 
             case TileType.Disappearing:
+                currentState = PlayerState.Idle;
+                TryConsumeBufferedInput();
                 StartCoroutine(HandleDisappearingTile(currentTile));
                 break;
         }
@@ -106,8 +118,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HandleDisappearingTile(Tile tile)
     {
-        isMoving = false;
-
         yield return new WaitForSeconds(1f);
 
         // Only remove if player is no longer standing on it
@@ -121,5 +131,20 @@ public class PlayerController : MonoBehaviour
         {
             tile.RemoveTile();
         }
+    }
+
+    private void TryConsumeBufferedInput()
+    {
+        if (!hasBufferedInput)
+            return;
+
+        if (currentState != PlayerState.Idle)
+            return;
+
+        hasBufferedInput = false;
+
+        Vector2Int direction = bufferedDirection;
+
+        TryMove(direction);
     }
 }
