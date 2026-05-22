@@ -4,8 +4,17 @@ public class Tile : MonoBehaviour
 {
     public TileType tileType = TileType.Normal;
 
-    public bool IsWalkable()
+    private GridManager gridManager;
+
+    private void Awake()
     {
-        return true;
+        gridManager = FindObjectOfType<GridManager>();
+    }
+
+    public void RemoveTile()
+    {
+        gridManager.UnregisterTile(this);
+
+        Destroy(gameObject);
     }
 }

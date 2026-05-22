@@ -61,17 +61,13 @@ public class GridManager : MonoBehaviour
         );
     }
 
-    public void RemoveTile(Vector3 worldPos)
+    public void UnregisterTile(Tile tile)
     {
-        Vector2Int gridPos = WorldToGrid(worldPos);
+        Vector2Int gridPos = WorldToGrid(tile.transform.position);
 
         if (tiles.ContainsKey(gridPos))
         {
-            Tile tile = tiles[gridPos];
-
             tiles.Remove(gridPos);
-
-            Destroy(tile.gameObject);
         }
     }
 }

@@ -9,10 +9,17 @@ public class PlayerController : MonoBehaviour
     public float rollSpeed = 4f;
     private bool isMoving;
     private Vector3 targetPosition;
+    private Vector2Int bufferedDirection;
+    private bool hasBufferedInput;
 
     public void TryMove(Vector2Int direction)
     {
-        if (isMoving) return;
+        if (isMoving)
+        {
+            bufferedDirection = direction;
+            hasBufferedInput = true;
+            return;
+        }
 
         Vector3 nextWorldPos = gridManager.GetNextWorldPosition(transform.position, direction);
 
@@ -47,6 +54,12 @@ public class PlayerController : MonoBehaviour
         );
 
         HandleTile();
+
+        if (hasBufferedInput)
+        {
+            hasBufferedInput = false;
+            TryMove(bufferedDirection);
+        }
     }
 
     private IEnumerator Fall()
@@ -93,12 +106,20 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HandleDisappearingTile(Tile tile)
     {
-        yield return new WaitForSeconds(0.2f);
+        isMoving = false;
 
-        gridManager.RemoveTile(tile.transform.position);
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(0.1f);
+        // Only remove if player is no longer standing on it
+        if (gridManager.GetTileAtPosition(transform.position) == tile)
+        {
+            tile.RemoveTile();
 
-        StartCoroutine(Fall());
+            StartCoroutine(Fall());
+        }
+        else
+        {
+            tile.RemoveTile();
+        }
     }
 }
