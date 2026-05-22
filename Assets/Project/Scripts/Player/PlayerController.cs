@@ -21,10 +21,12 @@ public class PlayerController : MonoBehaviour
     }
 
     private PlayerState currentState;
+    private LevelManager levelManager;
 
     private void Awake()
     {
         currentState = PlayerState.Idle;
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     public void TryMove(Vector2Int direction)
@@ -83,7 +85,11 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Player Fell!");
+        currentState = PlayerState.Dead;
+
+        yield return new WaitForSeconds(0.5f);
+
+        levelManager.LoseLevel();
     }
 
     private void HandleTile()
@@ -104,8 +110,8 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case TileType.Goal:
-                Debug.Log("LEVEL COMPLETE");
                 currentState = PlayerState.Winning;
+                levelManager.WinLevel();
                 break;
 
             case TileType.Disappearing:
