@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Roll(Vector3 targetPos, Vector2Int direction)
     {
         currentState = PlayerState.Rolling;
+        AudioManager.Instance.PlayRoll();
 
         Vector3 pivot = transform.position +
                         (Vector3.down + new Vector3(direction.x, 0, direction.y)) * 0.5f;
@@ -69,6 +70,8 @@ public class PlayerController : MonoBehaviour
             Mathf.Round(transform.eulerAngles.y / 90) * 90,
             Mathf.Round(transform.eulerAngles.z / 90) * 90
         );
+
+        AudioManager.Instance.PlayLand();
 
         HandleTile();
     }
@@ -125,6 +128,8 @@ public class PlayerController : MonoBehaviour
     private IEnumerator HandleDisappearingTile(Tile tile)
     {
         yield return new WaitForSeconds(1f);
+
+        AudioManager.Instance.PlayBreak();
 
         // Only remove if player is no longer standing on it
         if (gridManager.GetTileAtPosition(transform.position) == tile)
