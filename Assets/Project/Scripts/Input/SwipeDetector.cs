@@ -11,11 +11,17 @@ public class SwipeDetector : MonoBehaviour
     public float minSwipeDistance = 50f;
 
     private PlayerController player;
+    private Camera mainCamera;
 
     private void Awake()
     {
         inputActions = new CubeInputActions();
         player = FindObjectOfType<PlayerController>();
+    }
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
     }
 
     private void OnEnable()
@@ -53,16 +59,63 @@ public class SwipeDetector : MonoBehaviour
         if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
         {
             if (delta.x > 0)
-                player.TryMove(Vector2Int.left);
+            {
+                player.TryMove(
+                    GetCameraRelativeDirection(Vector2Int.right)
+                );
+            }
             else
-                player.TryMove(Vector2Int.right);
+            {
+                player.TryMove(
+                    GetCameraRelativeDirection(Vector2Int.left)
+                );
+            }
         }
         else
         {
             if (delta.y > 0)
-                player.TryMove(Vector2Int.down);
+            {
+                player.TryMove(
+                    GetCameraRelativeDirection(Vector2Int.up)
+                );
+            }
             else
-                player.TryMove(Vector2Int.up);
+            {
+                player.TryMove(
+                    GetCameraRelativeDirection(Vector2Int.down)
+                );
+            }
+        }
+    }
+
+    private Vector2Int GetCameraRelativeDirection(Vector2Int inputDirection)
+    {
+        Vector3 cameraForward = mainCamera.transform.forward;
+        Vector3 cameraRight = mainCamera.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 moveDirection =
+            cameraRight * inputDirection.x +
+            cameraForward * inputDirection.y;
+
+        moveDirection = moveDirection.normalized;
+
+        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.z))
+        {
+            return moveDirection.x > 0
+                ? Vector2Int.right
+                : Vector2Int.left;
+        }
+        else
+        {
+            return moveDirection.z > 0
+                ? Vector2Int.up
+                : Vector2Int.down;
         }
     }
 }

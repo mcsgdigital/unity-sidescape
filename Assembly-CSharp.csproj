@@ -67,6 +67,7 @@
     <Compile Include="Assets/Project/Scripts/UI/FadeUI.cs" />
     <Compile Include="Assets/Project/Scripts/Level/LevelCompleteUI.cs" />
     <Compile Include="Assets/Project/Scripts/System/BootstrapLoader.cs" />
+    <Compile Include="Assets/Project/Scripts/Camera/CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
