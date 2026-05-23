@@ -140,4 +140,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
-  linkedTeleport: {fileID: 0}

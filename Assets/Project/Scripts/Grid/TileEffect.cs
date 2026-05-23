@@ -51,7 +51,6 @@ public class TileEffect : MonoBehaviour
 
     private IEnumerator ResetPositionAfterEffect()
     {
-        Debug.Log("Waiting for effect to finish...");
         yield return new WaitForSeconds(effect.main.duration);
         effect.transform.localPosition = originalEffectPosition; // reset to original position
     }

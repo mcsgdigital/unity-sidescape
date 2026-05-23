@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
 
     private Transform openPosition;
     private Transform closedPosition;
+    private ParticleSystem openEffect;
 
 
     private void Awake()
@@ -15,6 +16,9 @@ public class Door : MonoBehaviour
         closedPosition = transform.Find("Closed");
 
         openPosition.gameObject.SetActive(false);
+
+        openEffect = GetComponentInChildren<ParticleSystem>();
+        StopEffect();
     }
 
     public void Open()
@@ -36,5 +40,21 @@ public class Door : MonoBehaviour
     public bool IsBlocking()
     {
         return !isOpen;
+    }
+
+    public void StopEffect()
+    {
+        if (openEffect != null)
+        {
+            openEffect.Stop();
+        }
+    }
+
+    public void PlayEffect()
+    {
+        if (openEffect != null)
+        {
+            openEffect.Play();
+        }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public TileType tileType = TileType.Normal;
-    public Tile linkedTeleport;
 
     private GridManager gridManager;
     private TileEffect tileEffect;

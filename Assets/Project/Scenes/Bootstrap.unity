@@ -860,7 +860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0ed950cb9b494caf33f718e895cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   offset: {x: 0, y: 8, z: -6}
   smoothSpeed: 5
 --- !u!114 &1458466583
@@ -1008,6 +1007,7 @@ MonoBehaviour:
   landClip: {fileID: 8300000, guid: eedac016c01004af4a737df2865104c9, type: 3}
   breakClip: {fileID: 8300000, guid: 5ce6c6df29e4c4d359a92931aba5dd58, type: 3}
   teleportClip: {fileID: 8300000, guid: b3ec4210f020142b89a74e3075628aae, type: 3}
+  switchClip: {fileID: 8300000, guid: b9516bdcd7b9a426bb5df0a2f63163ac, type: 3}
 --- !u!4 &1645604381
 Transform:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GridManager gridManager;
     public AnimationCurve rollCurve;
     public float rollSpeed = 4f;
 
@@ -12,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetPosition;
     private Vector2Int bufferedDirection;
     private bool hasBufferedInput;
+    private GridManager gridManager;
 
     public enum PlayerState
     {
@@ -33,8 +33,27 @@ public class PlayerController : MonoBehaviour
         gfx = transform.GetChild(0).gameObject;
     }
 
+    private void Start()
+    {
+        if (gridManager == null)
+        {
+            gridManager = FindObjectOfType<GridManager>();
+        }
+    }
+
     public void TryMove(Vector2Int direction)
     {
+        if (gridManager == null)
+        {
+            gridManager = FindObjectOfType<GridManager>();
+
+            if (gridManager == null)
+            {
+                Debug.LogError("GridManager not found!");
+                return;
+            }
+        }
+
         if (currentState != PlayerState.Idle)
         {
             bufferedDirection = direction;
@@ -220,10 +239,12 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.15f);
 
-        if (tile.linkedTeleport != null)
+        Tile linkedTeleport = tile.GetComponent<TileTeleport>().linkedTeleport;
+
+        if (linkedTeleport != null)
         {
             Vector3 destination =
-                tile.linkedTeleport.transform.position;
+                linkedTeleport.transform.position;
 
             transform.position =
                 destination + Vector3.up * 0.5f;
@@ -233,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
         currentState = PlayerState.Idle;
         tile.StopEffect();
-        tile.linkedTeleport.PlayTeleportOutEffect();
+        linkedTeleport.PlayTeleportOutEffect();
 
         yield return new WaitForSeconds(0.5f);
         // Show visuals AFTER effect begins
@@ -241,7 +262,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        tile.linkedTeleport.StopEffect();
+        linkedTeleport.StopEffect();
 
         TryConsumeBufferedInput();
     }
