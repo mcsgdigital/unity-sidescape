@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve rollCurve;
     public float rollSpeed = 4f;
 
-    [SerializeField] private GameObject graphicsObject;
-
+    private GameObject gfx;
     private Vector3 targetPosition;
     private Vector2Int bufferedDirection;
     private bool hasBufferedInput;
@@ -31,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         currentState = PlayerState.Idle;
         levelManager = FindObjectOfType<LevelManager>();
+        gfx = transform.GetChild(0).gameObject;
     }
 
     public void TryMove(Vector2Int direction)
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // Hide player visuals
-        graphicsObject.SetActive(false);
+        gfx.SetActive(false);
 
         yield return new WaitForSeconds(0.15f);
 
@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         // Show visuals AFTER effect begins
-        graphicsObject.SetActive(true);
+        gfx.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 

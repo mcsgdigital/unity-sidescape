@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1179252368
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1202196035
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1341659898
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +667,7 @@ GameObject:
   - component: {fileID: 1413021154}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,6 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1594249702
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 1
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1700489749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1987610747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 2
+  linkedTeleport: {fileID: 0}
 --- !u!1 &2003215699
 GameObject:
   m_ObjectHideFlags: 0

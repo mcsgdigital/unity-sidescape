@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1179252368
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1202196035
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1322704991
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 1
+  linkedTeleport: {fileID: 0}
 --- !u!65 &1322704994
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -772,7 +777,7 @@ GameObject:
   - component: {fileID: 1413021154}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -952,6 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1490135103
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!65 &1490135106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1170,6 +1177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1664595336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,6 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!65 &1664595339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1388,6 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  linkedTeleport: {fileID: 0}
 --- !u!1 &1987610747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 2
+  linkedTeleport: {fileID: 0}
 --- !u!1 &2003215699
 GameObject:
   m_ObjectHideFlags: 0
