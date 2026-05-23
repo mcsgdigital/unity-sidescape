@@ -5,12 +5,15 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public TileType tileType = TileType.Normal;
+    public Tile linkedTeleport;
 
     private GridManager gridManager;
+    private TileEffect tileEffect;
 
     private void Awake()
     {
         gridManager = FindObjectOfType<GridManager>();
+        tileEffect = GetComponent<TileEffect>();
     }
 
     public void RemoveTile()
@@ -41,5 +44,37 @@ public class Tile : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void PlayEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.PlayEffect();
+        }
+    }
+
+    public void StopEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.StopEffect();
+        }
+    }
+
+    public void PlayTeleportInEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.PlayTeleportIn();
+        }
+    }
+
+    public void PlayTeleportOutEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.PlayTeleportOut();
+        }
     }
 }

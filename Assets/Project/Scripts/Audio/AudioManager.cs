@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip rollClip;
     public AudioClip landClip;
     public AudioClip breakClip;
+    public AudioClip teleportClip;
 
     private void Awake()
     {
@@ -28,5 +29,10 @@ public class AudioManager : MonoBehaviour
     public void PlayBreak()
     {
         audioSource.PlayOneShot(breakClip);
+    }
+
+    public void PlayTeleport()
+    {
+        audioSource.PlayOneShot(teleportClip);
     }
 }

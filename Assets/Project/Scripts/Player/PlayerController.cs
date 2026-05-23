@@ -6,8 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public GridManager gridManager;
     public AnimationCurve rollCurve;
-
     public float rollSpeed = 4f;
+
+    [SerializeField] private GameObject graphicsObject;
+
     private Vector3 targetPosition;
     private Vector2Int bufferedDirection;
     private bool hasBufferedInput;
@@ -18,7 +20,8 @@ public class PlayerController : MonoBehaviour
         Rolling,
         Falling,
         Dead,
-        Winning
+        Winning,
+        Teleporting
     }
 
     private PlayerState currentState;
@@ -130,6 +133,10 @@ public class PlayerController : MonoBehaviour
                 TryConsumeBufferedInput();
                 StartCoroutine(HandleDisappearingTile(currentTile));
                 break;
+
+            case TileType.Teleport:
+                StartCoroutine(HandleTeleport(currentTile));
+                break;
         }
     }
 
@@ -170,5 +177,44 @@ public class PlayerController : MonoBehaviour
         Vector2Int direction = bufferedDirection;
 
         TryMove(direction);
+    }
+
+    private IEnumerator HandleTeleport(Tile tile)
+    {
+        currentState = PlayerState.Teleporting;
+        AudioManager.Instance.PlayTeleport();
+        tile.PlayTeleportInEffect();
+
+        yield return new WaitForSeconds(1f);
+
+        // Hide player visuals
+        graphicsObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.15f);
+
+        if (tile.linkedTeleport != null)
+        {
+            Vector3 destination =
+                tile.linkedTeleport.transform.position;
+
+            transform.position =
+                destination + Vector3.up * 0.5f;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        currentState = PlayerState.Idle;
+        tile.StopEffect();
+        tile.linkedTeleport.PlayTeleportOutEffect();
+
+        yield return new WaitForSeconds(0.5f);
+        // Show visuals AFTER effect begins
+        graphicsObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        tile.linkedTeleport.StopEffect();
+
+        TryConsumeBufferedInput();
     }
 }

@@ -2,5 +2,6 @@ public enum TileType
 {
     Normal,
     Goal,
-    Disappearing
+    Disappearing,
+    Teleport
 }
