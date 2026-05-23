@@ -275,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5997312530505008306, guid: 60b11f166414948efa74d19b191df78d, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5997312530505008306, guid: 60b11f166414948efa74d19b191df78d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -328,6 +328,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5997312530505008306, guid: 60b11f166414948efa74d19b191df78d, type: 3}
   m_PrefabInstance: {fileID: 343037049}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &343037051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4766415074878172718, guid: 60b11f166414948efa74d19b191df78d, type: 3}
+  m_PrefabInstance: {fileID: 343037049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d8d2745a2684b3d920ca3a8ee8f171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &482922566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -448,7 +459,7 @@ PrefabInstance:
     - target: {fileID: 4964382702216015752, guid: 637ba41986f0e4f3db1ba672b1f7aca2, type: 3}
       propertyPath: linkedDoors.Array.data[0]
       value: 
-      objectReference: {fileID: 5997312531488393571}
+      objectReference: {fileID: 343037051}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 637ba41986f0e4f3db1ba672b1f7aca2, type: 3}
 --- !u!4 &492615555 stripped
