@@ -3,5 +3,7 @@ public enum TileType
     Normal,
     Goal,
     Disappearing,
-    Teleport
+    Teleport,
+    Door,
+    Switch
 }

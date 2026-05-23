@@ -44,6 +44,17 @@ public class PlayerController : MonoBehaviour
 
         Vector3 nextWorldPos = gridManager.GetNextWorldPosition(transform.position, direction);
 
+        Tile targetTile = gridManager.GetTileAtPosition(nextWorldPos);
+
+        if (targetTile != null && targetTile.tileType == TileType.Door)
+        {
+            Door door = targetTile.GetComponent<Door>();
+            if (door != null && !door.isOpen)
+            {
+                return;
+            }
+        }
+
         StartCoroutine(Roll(nextWorldPos, direction));
     }
 
@@ -136,6 +147,23 @@ public class PlayerController : MonoBehaviour
 
             case TileType.Teleport:
                 StartCoroutine(HandleTeleport(currentTile));
+                break;
+
+            case TileType.Switch:
+                SwitchTile switchTile = currentTile.GetComponent<SwitchTile>();
+
+                if (switchTile != null)
+                {
+                    switchTile.Activate();
+                }
+
+                currentState = PlayerState.Idle;
+                TryConsumeBufferedInput();
+                break;
+
+            case TileType.Door:
+                currentState = PlayerState.Idle;
+                TryConsumeBufferedInput();
                 break;
         }
     }

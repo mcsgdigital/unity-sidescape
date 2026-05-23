@@ -32,12 +32,17 @@ public class GridManager : MonoBehaviour
         return tiles.ContainsKey(gridPos);
     }
 
-    public Tile GetTileAtPosition(Vector3 worldPos)
+    public Tile GetTileAtPosition(Vector3 worldPosition)
     {
-        Vector2Int gridPos = WorldToGrid(worldPos);
+        Vector2Int gridPos = new Vector2Int(
+            Mathf.RoundToInt(worldPosition.x),
+            Mathf.RoundToInt(worldPosition.z)
+        );
 
-        if (tiles.ContainsKey(gridPos))
-            return tiles[gridPos];
+        if (tiles.TryGetValue(gridPos, out Tile tile))
+        {
+            return tile;
+        }
 
         return null;
     }

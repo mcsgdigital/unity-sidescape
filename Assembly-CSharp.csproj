@@ -71,6 +71,8 @@
     <Compile Include="Assets/Project/Scripts/Input/SwipeDetector.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/TileType.cs" />
     <Compile Include="Assets/Project/Scripts/Level/LevelManager.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/Door.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/SwitchTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
