@@ -156,10 +156,6 @@ public class PlayerController : MonoBehaviour
         }
 
         currentTile.OnPlayerEnter(this);
-        if (!(currentTile is IceTile))
-        {
-            StopSliding();
-        }
 
         switch (currentTile.tileType)
         {
@@ -294,29 +290,47 @@ public class PlayerController : MonoBehaviour
 
     private void ContinueSliding()
     {
-        // Vector2Int nextGrid = gridPosition + slideDirection;
+        Tile nextTile = gridManager.GetTileAtPosition(
+            gridManager.GetNextWorldPosition(transform.position, slideDirection)
+        );
 
-        Tile nextTile = gridManager.GetTileAtPosition(gridManager.GetNextWorldPosition(transform.position, slideDirection));
-        // Tile nextTile = GridManager.Instance.GetTile(nextGrid);
-
+        // No tile ahead = fall
         if (nextTile == null)
         {
             StopSliding();
-            Fall();
+
+            Vector3 edgePosition =
+                gridManager.GetNextWorldPosition(transform.position, slideDirection);
+
+            StartCoroutine(Roll(edgePosition, slideDirection));
+
             return;
         }
 
+        // Blocked ahead = stop sliding
         if (nextTile.IsBlocking())
         {
             StopSliding();
+            currentState = PlayerState.Idle;
             return;
         }
 
-        if (!(nextTile is IceTile))
+        // ONLY continue sliding if next tile is ALSO ice
+        if (nextTile is IceTile)
         {
-            StopSliding();
+            StartCoroutine(
+                Roll(
+                    gridManager.GetNextWorldPosition(transform.position, slideDirection),
+                    slideDirection
+                )
+            );
         }
-
-        StartCoroutine(Roll(gridManager.GetNextWorldPosition(transform.position, slideDirection), slideDirection));
+        else
+        {
+            // Stop on current tile and regain control
+            StopSliding();
+            currentState = PlayerState.Idle;
+            TryConsumeBufferedInput();
+        }
     }
 }
