@@ -6,5 +6,6 @@ public enum TileType
     Teleport,
     Door,
     Switch,
-    Ice
+    Ice,
+    Wall
 }

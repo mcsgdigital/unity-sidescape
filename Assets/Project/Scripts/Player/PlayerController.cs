@@ -85,6 +85,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (targetTile != null && targetTile.tileType == TileType.Wall)
+        {
+            return;
+        }
+
         StartCoroutine(Roll(nextWorldPos, direction));
     }
 
@@ -330,47 +335,39 @@ public class PlayerController : MonoBehaviour
 
     private void ContinueSliding()
     {
-        Tile nextTile = gridManager.GetTileAtPosition(
-            gridManager.GetNextWorldPosition(transform.position, slideDirection)
-        );
+        Vector3 nextPos =
+            gridManager.GetNextWorldPosition(transform.position, slideDirection);
 
-        // No tile ahead = fall
+        Tile nextTile =
+            gridManager.GetTileAtPosition(nextPos);
+
+        // No tile ahead = fall off edge
         if (nextTile == null)
         {
             StopSliding();
 
-            Vector3 edgePosition =
-                gridManager.GetNextWorldPosition(transform.position, slideDirection);
-
-            StartCoroutine(Roll(edgePosition, slideDirection));
+            StartCoroutine(Roll(nextPos, slideDirection));
 
             return;
         }
 
-        // Blocked ahead = stop sliding
+        // Closed door or blocking tile
         if (nextTile.IsBlocking())
         {
             StopSliding();
+
             currentState = PlayerState.Idle;
+
             return;
         }
 
-        // ONLY continue sliding if next tile is ALSO ice
-        if (nextTile is IceTile)
+        // ALWAYS move onto next valid tile
+        StartCoroutine(Roll(nextPos, slideDirection));
+
+        // ONLY continue sliding afterward if next tile is ice
+        if (!(nextTile is IceTile))
         {
-            StartCoroutine(
-                Roll(
-                    gridManager.GetNextWorldPosition(transform.position, slideDirection),
-                    slideDirection
-                )
-            );
-        }
-        else
-        {
-            // Stop on current tile and regain control
             StopSliding();
-            currentState = PlayerState.Idle;
-            TryConsumeBufferedInput();
         }
     }
 }

@@ -35,7 +35,7 @@ public class TileEffect : MonoBehaviour
 
     public void PlayTeleportOut()
     {
-        effect.transform.localPosition = originalEffectPosition + Vector3.up * 5f; // Move up 1 unit
+        effect.transform.localPosition = originalEffectPosition + Vector3.up * 2f; // Move up 1 unit
         SetShapeRotation(-90f); // Particles travel DOWN
         effect.Clear();
         effect.Play();

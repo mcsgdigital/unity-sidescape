@@ -60,22 +60,22 @@
     <Compile Include="Assets/Project/Scripts/Input/SwipeInput.cs" />
     <Compile Include="Assets/Project/Scripts/System/BootstrapLoader.cs" />
     <Compile Include="Assets/Project/Scripts/Input/CubeInputActions.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/SwitchTile.cs" />
     <Compile Include="Assets/Project/Scripts/Camera/CameraShake.cs" />
     <Compile Include="Assets/Project/Scripts/UI/FadeUI.cs" />
     <Compile Include="Assets/Project/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Project/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Project/Scripts/Level/LevelCompleteUI.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/GridManager.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/IceTile.cs" />
     <Compile Include="Assets/Project/Scripts/Camera/CameraFollow.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/Tile.cs" />
     <Compile Include="Assets/Project/Scripts/Input/SwipeDetector.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/TileType.cs" />
-    <Compile Include="Assets/Project/Scripts/Level/LevelManager.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/Door.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/SwitchTile.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/TileTeleport.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/IceTile.cs" />
     <Compile Include="Assets/Project/Scripts/Player/PlayerEffects.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/TileType.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/Door.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/TileTeleport.cs" />
+    <Compile Include="Assets/Project/Scripts/Level/LevelManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
