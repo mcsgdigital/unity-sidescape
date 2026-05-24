@@ -5,5 +5,6 @@ public enum TileType
     Disappearing,
     Teleport,
     Door,
-    Switch
+    Switch,
+    Ice
 }

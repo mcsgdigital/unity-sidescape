@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState currentState;
     private LevelManager levelManager;
+    private bool isSliding;
+    private Vector2Int slideDirection;
+
 
     private void Awake()
     {
@@ -81,6 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         currentState = PlayerState.Rolling;
         AudioManager.Instance.PlayRoll();
+        slideDirection = direction;
 
         Vector3 pivot = transform.position +
                         (Vector3.down + new Vector3(direction.x, 0, direction.y)) * 0.5f;
@@ -115,6 +119,11 @@ public class PlayerController : MonoBehaviour
         AudioManager.Instance.PlayLand();
 
         HandleTile();
+
+        if (isSliding)
+        {
+            ContinueSliding();
+        }
     }
 
     private IEnumerator Fall()
@@ -144,6 +153,12 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Fall());
             return;
+        }
+
+        currentTile.OnPlayerEnter(this);
+        if (!(currentTile is IceTile))
+        {
+            StopSliding();
         }
 
         switch (currentTile.tileType)
@@ -265,5 +280,43 @@ public class PlayerController : MonoBehaviour
         linkedTeleport.StopEffect();
 
         TryConsumeBufferedInput();
+    }
+
+    public void EnterIce()
+    {
+        isSliding = true;
+    }
+
+    private void StopSliding()
+    {
+        isSliding = false;
+    }
+
+    private void ContinueSliding()
+    {
+        // Vector2Int nextGrid = gridPosition + slideDirection;
+
+        Tile nextTile = gridManager.GetTileAtPosition(gridManager.GetNextWorldPosition(transform.position, slideDirection));
+        // Tile nextTile = GridManager.Instance.GetTile(nextGrid);
+
+        if (nextTile == null)
+        {
+            StopSliding();
+            Fall();
+            return;
+        }
+
+        if (nextTile.IsBlocking())
+        {
+            StopSliding();
+            return;
+        }
+
+        if (!(nextTile is IceTile))
+        {
+            StopSliding();
+        }
+
+        StartCoroutine(Roll(gridManager.GetNextWorldPosition(transform.position, slideDirection), slideDirection));
     }
 }

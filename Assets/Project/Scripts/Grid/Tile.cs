@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public virtual void OnPlayerEnter(PlayerController player)
+    {
+
+    }
+
     public TileType tileType = TileType.Normal;
 
     private GridManager gridManager;
@@ -75,5 +80,10 @@ public class Tile : MonoBehaviour
         {
             tileEffect.PlayTeleportOut();
         }
+    }
+
+    public bool IsBlocking()
+    {
+        return tileType != TileType.Normal && tileType != TileType.Goal && tileType != TileType.Ice;
     }
 }
