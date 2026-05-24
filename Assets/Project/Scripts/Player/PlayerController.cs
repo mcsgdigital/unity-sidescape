@@ -7,11 +7,14 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve rollCurve;
     public float rollSpeed = 4f;
 
+    [SerializeField] private float initialPositionY = 3f;
+
     private GameObject gfx;
     private Vector3 targetPosition;
     private Vector2Int bufferedDirection;
     private bool hasBufferedInput;
     private GridManager gridManager;
+    private PlayerEffects playerEffects;
 
     public enum PlayerState
     {
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
         currentState = PlayerState.Idle;
         levelManager = FindObjectOfType<LevelManager>();
         gfx = transform.GetChild(0).gameObject;
+        playerEffects = GetComponent<PlayerEffects>();
+
+        transform.position = new Vector3(transform.position.x, initialPositionY, transform.position.z);
     }
 
     private void Start()
@@ -42,6 +48,8 @@ public class PlayerController : MonoBehaviour
         {
             gridManager = FindObjectOfType<GridManager>();
         }
+
+        StartCoroutine(Fall());
     }
 
     public void TryMove(Vector2Int direction)
@@ -132,17 +140,49 @@ public class PlayerController : MonoBehaviour
 
         float fallSpeed = 5f;
 
-        while (transform.position.y > -5f)
+        while (true)
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+            Vector3 checkPosition = new Vector3(
+                transform.position.x,
+                Mathf.Round(transform.position.y),
+                transform.position.z
+            );
+
+            Tile tileBelow = gridManager.GetTileAtPosition(checkPosition);
+
+            // Found landing tile
+            if (tileBelow != null &&
+                transform.position.y <= tileBelow.transform.position.y + 0.5f)
+            {
+                // Snap onto tile
+                transform.position = tileBelow.transform.position + Vector3.up * 0.5f;
+
+                currentState = PlayerState.Idle;
+
+                AudioManager.Instance.PlayLand();
+                playerEffects.LandingSquatch();
+
+                HandleTile();
+
+                yield break;
+            }
+
+            // Fell too far = death
+            if (transform.position.y < -10f)
+            {
+                currentState = PlayerState.Dead;
+
+                yield return new WaitForSeconds(0.5f);
+
+                levelManager.LoseLevel();
+
+                yield break;
+            }
+
             yield return null;
         }
-
-        currentState = PlayerState.Dead;
-
-        yield return new WaitForSeconds(0.5f);
-
-        levelManager.LoseLevel();
     }
 
     private void HandleTile()

@@ -75,6 +75,7 @@
     <Compile Include="Assets/Project/Scripts/Grid/SwitchTile.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/TileTeleport.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/IceTile.cs" />
+    <Compile Include="Assets/Project/Scripts/Player/PlayerEffects.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
