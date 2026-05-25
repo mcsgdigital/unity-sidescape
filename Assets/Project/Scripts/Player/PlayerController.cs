@@ -72,9 +72,18 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Vector3 nextWorldPos = gridManager.GetNextWorldPosition(transform.position, direction);
+        Vector3 nextWorldPos = transform.position + new Vector3(direction.x, 0, direction.y);
 
-        Tile targetTile = gridManager.GetTileAtPosition(nextWorldPos);
+        Tile targetTile = gridManager.GetTileAtExactHeight(
+            nextWorldPos,
+            transform.position.y - 0.5f
+        );
+
+        if (targetTile != null)
+        {
+            nextWorldPos =
+                targetTile.transform.position + Vector3.up * 0.5f;
+        }
 
         if (targetTile != null && targetTile.tileType == TileType.Door)
         {
@@ -155,7 +164,9 @@ public class PlayerController : MonoBehaviour
                 transform.position.z
             );
 
-            Tile tileBelow = gridManager.GetTileAtPosition(checkPosition);
+            Tile tileBelow = gridManager.GetHighestTileBelow(
+                transform.position
+            );
 
             // Found landing tile
             if (tileBelow != null &&
@@ -192,7 +203,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTile()
     {
-        Tile currentTile = gridManager.GetTileAtPosition(transform.position);
+        Tile currentTile = gridManager.GetTileAtExactHeight(
+            transform.position,
+            transform.position.y - 0.5f
+        );
 
         if (currentTile == null)
         {
@@ -338,8 +352,10 @@ public class PlayerController : MonoBehaviour
         Vector3 nextPos =
             gridManager.GetNextWorldPosition(transform.position, slideDirection);
 
-        Tile nextTile =
-            gridManager.GetTileAtPosition(nextPos);
+        Tile nextTile = gridManager.GetTileAtExactHeight(
+            nextPos,
+            transform.position.y - 0.5f
+        );
 
         // No tile ahead = fall off edge
         if (nextTile == null)

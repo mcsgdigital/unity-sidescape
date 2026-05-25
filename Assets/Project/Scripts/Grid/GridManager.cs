@@ -5,6 +5,7 @@ public class GridManager : MonoBehaviour
 {
     private Dictionary<Vector2Int, Tile> tiles =
         new Dictionary<Vector2Int, Tile>();
+    private Tile[] allTiles;
 
     private void Awake()
     {
@@ -13,15 +14,25 @@ public class GridManager : MonoBehaviour
 
     private void RegisterTiles()
     {
-        Tile[] foundTiles = FindObjectsOfType<Tile>();
+        allTiles = FindObjectsOfType<Tile>();
 
-        foreach (Tile tile in foundTiles)
+        foreach (Tile tile in allTiles)
         {
             Vector2Int gridPos = WorldToGrid(tile.transform.position);
 
+            // ONLY register highest tile for movement dictionary
             if (!tiles.ContainsKey(gridPos))
             {
                 tiles.Add(gridPos, tile);
+            }
+            else
+            {
+                // Keep highest tile
+                if (tile.transform.position.y >
+                    tiles[gridPos].transform.position.y)
+                {
+                    tiles[gridPos] = tile;
+                }
             }
         }
     }
@@ -58,6 +69,29 @@ public class GridManager : MonoBehaviour
         );
     }
 
+    public Tile GetTileAtExactHeight(Vector3 position, float height)
+    {
+        foreach (Tile tile in allTiles)
+        {
+            bool sameXZ =
+                Mathf.RoundToInt(tile.transform.position.x) ==
+                Mathf.RoundToInt(position.x)
+                &&
+                Mathf.RoundToInt(tile.transform.position.z) ==
+                Mathf.RoundToInt(position.z);
+
+            bool sameHeight =
+                Mathf.Abs(tile.transform.position.y - height) < 0.1f;
+
+            if (sameXZ && sameHeight)
+            {
+                return tile;
+            }
+        }
+
+        return null;
+    }
+
     public Vector2Int WorldToGrid(Vector3 worldPos)
     {
         return new Vector2Int(
@@ -74,5 +108,36 @@ public class GridManager : MonoBehaviour
         {
             tiles.Remove(gridPos);
         }
+    }
+
+    public Tile GetHighestTileBelow(Vector3 position)
+    {
+        Tile bestTile = null;
+
+        foreach (Tile tile in allTiles)
+        {
+            bool sameXZ =
+                Mathf.RoundToInt(tile.transform.position.x) ==
+                Mathf.RoundToInt(position.x)
+                &&
+                Mathf.RoundToInt(tile.transform.position.z) ==
+                Mathf.RoundToInt(position.z);
+
+            if (!sameXZ)
+                continue;
+
+            // Tile must be below player
+            if (tile.transform.position.y >= position.y)
+                continue;
+
+            // Keep highest valid tile below
+            if (bestTile == null ||
+                tile.transform.position.y > bestTile.transform.position.y)
+            {
+                bestTile = tile;
+            }
+        }
+
+        return bestTile;
     }
 }
