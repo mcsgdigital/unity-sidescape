@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float rollSpeed = 4f;
 
     [SerializeField] private float initialPositionY = 3f;
+    [SerializeField] private DropPreview dropPreview;
 
     private GameObject gfx;
     private Vector3 targetPosition;
@@ -269,11 +270,6 @@ public class PlayerController : MonoBehaviour
             tile.RemoveTile();
 
             StartCoroutine(Fall());
-            // CameraShake shake = FindObjectOfType<CameraShake>();
-            // if (shake != null)
-            // {
-            //     shake.Shake();
-            // }
         }
         else
         {
@@ -386,4 +382,10 @@ public class PlayerController : MonoBehaviour
             StopSliding();
         }
     }
+
+    public bool IsIdle()
+    {
+        return currentState == PlayerState.Idle;
+    }
+
 }

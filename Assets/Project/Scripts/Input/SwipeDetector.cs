@@ -56,36 +56,25 @@ public class SwipeDetector : MonoBehaviour
         if (delta.magnitude < minSwipeDistance)
             return;
 
+        Vector2Int direction;
+
         if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
         {
-            if (delta.x > 0)
-            {
-                player.TryMove(
-                    GetCameraRelativeDirection(Vector2Int.right)
-                );
-            }
-            else
-            {
-                player.TryMove(
-                    GetCameraRelativeDirection(Vector2Int.left)
-                );
-            }
+            direction =
+                delta.x > 0
+                ? GetCameraRelativeDirection(Vector2Int.right)
+                : GetCameraRelativeDirection(Vector2Int.left);
         }
         else
         {
-            if (delta.y > 0)
-            {
-                player.TryMove(
-                    GetCameraRelativeDirection(Vector2Int.up)
-                );
-            }
-            else
-            {
-                player.TryMove(
-                    GetCameraRelativeDirection(Vector2Int.down)
-                );
-            }
+            direction =
+                delta.y > 0
+                ? GetCameraRelativeDirection(Vector2Int.up)
+                : GetCameraRelativeDirection(Vector2Int.down);
         }
+
+        // Then move
+        player.TryMove(direction);
     }
 
     private Vector2Int GetCameraRelativeDirection(Vector2Int inputDirection)

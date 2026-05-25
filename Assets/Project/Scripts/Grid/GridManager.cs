@@ -143,4 +143,33 @@ public class GridManager : MonoBehaviour
 
         return bestTile;
     }
+
+    public Tile GetHighestTileBelowPosition(Vector3 position)
+    {
+        Tile bestTile = null;
+
+        foreach (Tile tile in allTiles)
+        {
+            bool sameXZ =
+                Mathf.RoundToInt(tile.transform.position.x) ==
+                Mathf.RoundToInt(position.x)
+                &&
+                Mathf.RoundToInt(tile.transform.position.z) ==
+                Mathf.RoundToInt(position.z);
+
+            if (!sameXZ)
+                continue;
+
+            if (tile.transform.position.y >= position.y)
+                continue;
+
+            if (bestTile == null ||
+                tile.transform.position.y > bestTile.transform.position.y)
+            {
+                bestTile = tile;
+            }
+        }
+
+        return bestTile;
+    }
 }

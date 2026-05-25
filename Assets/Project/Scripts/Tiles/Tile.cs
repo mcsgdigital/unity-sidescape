@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Tile : MonoBehaviour
+{
+    public virtual void OnPlayerEnter(PlayerController player)
+    {
+
+    }
+
+    public TileType tileType = TileType.Normal;
+
+    private GridManager gridManager;
+    private TileEffect tileEffect;
+
+    private void Awake()
+    {
+        gridManager = FindObjectOfType<GridManager>();
+        tileEffect = GetComponent<TileEffect>();
+    }
+
+    public void RemoveTile()
+    {
+        gridManager.UnregisterTile(this);
+
+        StartCoroutine(Break());
+    }
+
+    public IEnumerator Break()
+    {
+        Vector3 originalScale = transform.localScale;
+
+        float timer = 0f;
+        float duration = 0.15f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            transform.localScale = Vector3.Lerp(
+                originalScale,
+                Vector3.zero,
+                timer / duration
+            );
+
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    public void PlayEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.PlayEffect();
+        }
+    }
+
+    public void StopEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.StopEffect();
+        }
+    }
+
+    public void PlayTeleportInEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.PlayTeleportIn();
+        }
+    }
+
+    public void PlayTeleportOutEffect()
+    {
+        if (tileEffect != null)
+        {
+            tileEffect.PlayTeleportOut();
+        }
+    }
+
+    public bool IsBlocking()
+    {
+        return tileType != TileType.Normal && tileType != TileType.Goal && tileType != TileType.Ice && tileType != TileType.Teleport && tileType != TileType.Switch;
+    }
+}
