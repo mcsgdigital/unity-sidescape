@@ -84,6 +84,6 @@ public class Tile : MonoBehaviour
 
     public bool IsBlocking()
     {
-        return tileType != TileType.Normal && tileType != TileType.Goal && tileType != TileType.Ice;
+        return tileType != TileType.Normal && tileType != TileType.Goal && tileType != TileType.Ice && tileType != TileType.Teleport && tileType != TileType.Switch;
     }
 }
