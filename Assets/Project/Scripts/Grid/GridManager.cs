@@ -73,6 +73,9 @@ public class GridManager : MonoBehaviour
     {
         foreach (Tile tile in allTiles)
         {
+            if (tile == null)
+                continue;
+
             bool sameXZ =
                 Mathf.RoundToInt(tile.transform.position.x) ==
                 Mathf.RoundToInt(position.x)
