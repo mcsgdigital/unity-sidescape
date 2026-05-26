@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
 
     public void TryMove(Vector2Int direction)
     {
+        if (CameraOrbit.Instance.IsInspecting()) return;
+
         if (gridManager == null)
         {
             gridManager = FindObjectOfType<GridManager>();

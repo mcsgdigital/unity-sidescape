@@ -2,12 +2,32 @@ using UnityEngine;
 
 public class CameraOrbit : MonoBehaviour
 {
-    private CameraFollow cameraFollow;
-
-    private Vector3 currentOffset;
-    private Vector3 targetOffset;
+    public static CameraOrbit Instance;
 
     public float rotateSpeed = 5f;
+    [Header("Inspect Mode")]
+    public Vector3 inspectOffset = new Vector3(0, 2f, -3f);
+    public float inspectSmoothSpeed = 8f;
+
+    private CameraFollow cameraFollow;
+    private Vector3 currentOffset;
+    private Vector3 targetOffset;
+    private bool inspectMode;
+    private Vector3 normalOffset;
+
+
+    private void Awake()
+    {
+        // create instance        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -19,14 +39,21 @@ public class CameraOrbit : MonoBehaviour
 
         targetOffset =
             currentOffset;
+
+        normalOffset = currentOffset;
     }
 
     private void Update()
     {
+        Vector3 desiredOffset =
+            inspectMode
+            ? GetInspectOffset()
+            : targetOffset;
+
         currentOffset = Vector3.Lerp(
             currentOffset,
-            targetOffset,
-            rotateSpeed * Time.deltaTime
+            desiredOffset,
+            inspectSmoothSpeed * Time.deltaTime
         );
 
         cameraFollow.SetOffset(currentOffset);
@@ -34,6 +61,8 @@ public class CameraOrbit : MonoBehaviour
 
     public void RotateRight()
     {
+        if (inspectMode) return;
+
         targetOffset =
             Quaternion.Euler(0, 90, 0) *
             targetOffset;
@@ -41,8 +70,34 @@ public class CameraOrbit : MonoBehaviour
 
     public void RotateLeft()
     {
+        if (inspectMode) return;
+
         targetOffset =
             Quaternion.Euler(0, -90, 0) *
             targetOffset;
+    }
+
+    private Vector3 GetInspectOffset()
+    {
+        Vector3 direction =
+            targetOffset.normalized;
+
+        return direction * inspectOffset.z
+            + Vector3.up * inspectOffset.y;
+    }
+
+    public void EnterInspectMode()
+    {
+        inspectMode = true;
+    }
+
+    public void ExitInspectMode()
+    {
+        inspectMode = false;
+    }
+
+    public bool IsInspecting()
+    {
+        return inspectMode;
     }
 }
