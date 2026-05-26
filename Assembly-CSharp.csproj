@@ -80,6 +80,7 @@
     <Compile Include="Assets/Project/Scripts/Tiles/DropPreviewEffect.cs" />
     <Compile Include="Assets/Project/Scripts/Tiles/TileVisual.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/LayerVisibilityManager.cs" />
+    <Compile Include="Assets/Project/Scripts/Camera/CameraOrbit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

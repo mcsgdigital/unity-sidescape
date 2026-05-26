@@ -7,7 +7,6 @@ public class CameraFollow : MonoBehaviour
 
     private Transform target;
 
-
     private void LateUpdate()
     {
         if (target == null)
@@ -16,18 +15,37 @@ public class CameraFollow : MonoBehaviour
             return;
         }
 
-        Vector3 desiredPosition = target.position + offset;
+        Vector3 desiredPosition =
+            target.position + offset;
 
         transform.position = Vector3.Lerp(
             transform.position,
             desiredPosition,
             smoothSpeed * Time.deltaTime
         );
+
+        Quaternion targetRotation =
+            Quaternion.LookRotation(
+                target.position - transform.position
+            );
+
+        transform.rotation =
+            Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                smoothSpeed * Time.deltaTime
+            );
+    }
+
+    public void SetOffset(Vector3 newOffset)
+    {
+        offset = newOffset;
     }
 
     private void FindPlayer()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player =
+            GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
         {
