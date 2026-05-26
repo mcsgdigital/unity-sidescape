@@ -183,8 +183,6 @@ public class PlayerController : MonoBehaviour
                 AudioManager.Instance.PlayLand();
                 playerEffects.LandingSquatch();
 
-                Debug.Log("[Fall]Player landed on tile at " + tileBelow);
-
                 HandleTile();
 
                 yield break;
@@ -208,7 +206,6 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTile()
     {
-        Debug.Log("Handling");
         Tile currentTile = gridManager.GetTileAtExactHeight(
             transform.position,
             transform.position.y - 0.5f
@@ -268,8 +265,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         AudioManager.Instance.PlayBreak();
-
-        Debug.Log("Breaking tile at " + tile);
 
         bool playerStandingOnTile =
             Mathf.RoundToInt(transform.position.x) ==

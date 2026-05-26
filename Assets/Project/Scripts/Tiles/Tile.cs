@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public virtual void OnPlayerEnter(PlayerController player)
-    {
-
-    }
+    public virtual void OnPlayerEnter(PlayerController player) { }
 
     public TileType tileType = TileType.Normal;
 
-    private GridManager gridManager;
     private TileEffect tileEffect;
 
     private void Awake()
     {
-        gridManager = FindObjectOfType<GridManager>();
         tileEffect = GetComponent<TileEffect>();
     }
 
-    public void RemoveTile()
+    public virtual void RemoveTile()
     {
-        gridManager.UnregisterTile(this);
+        GridManager gridManager =
+            FindObjectOfType<GridManager>();
+
+        if (gridManager != null)
+        {
+            gridManager.UnregisterTile(this);
+        }
 
         StartCoroutine(Break());
     }

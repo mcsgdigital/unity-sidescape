@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    private Dictionary<Vector2Int, Tile> tiles =
-        new Dictionary<Vector2Int, Tile>();
-    private Tile[] allTiles;
+    private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
+    private List<Tile> allTiles = new List<Tile>();
 
     private void Awake()
     {
@@ -14,7 +13,12 @@ public class GridManager : MonoBehaviour
 
     private void RegisterTiles()
     {
-        allTiles = FindObjectsOfType<Tile>();
+        Tile[] foundTiles = FindObjectsOfType<Tile>();
+
+        foreach (Tile tile in foundTiles)
+        {
+            RegisterTile(tile);
+        }
 
         foreach (Tile tile in allTiles)
         {
@@ -32,6 +36,70 @@ public class GridManager : MonoBehaviour
                     tiles[gridPos].transform.position.y)
                 {
                     tiles[gridPos] = tile;
+                }
+            }
+        }
+    }
+
+    public void RegisterTile(Tile tile)
+    {
+        if (!allTiles.Contains(tile))
+        {
+            allTiles.Add(tile);
+        }
+
+        Vector2Int gridPos = WorldToGrid(tile.transform.position);
+
+        if (!tiles.ContainsKey(gridPos))
+        {
+            tiles.Add(gridPos, tile);
+        }
+        else
+        {
+            if (tile.transform.position.y >
+                tiles[gridPos].transform.position.y)
+            {
+                tiles[gridPos] = tile;
+            }
+        }
+    }
+
+    public void UnregisterTile(Tile tile)
+    {
+        allTiles.Remove(tile);
+
+        Vector2Int gridPos = WorldToGrid(tile.transform.position);
+
+        if (tiles.ContainsKey(gridPos))
+        {
+            if (tiles[gridPos] == tile)
+            {
+                tiles.Remove(gridPos);
+
+                Tile highestReplacement = null;
+
+                foreach (Tile otherTile in allTiles)
+                {
+                    if (otherTile == null)
+                        continue;
+
+                    Vector2Int otherPos =
+                        WorldToGrid(otherTile.transform.position);
+
+                    if (otherPos != gridPos)
+                        continue;
+
+                    if (highestReplacement == null ||
+                        otherTile.transform.position.y >
+                        highestReplacement.transform.position.y)
+                    {
+                        highestReplacement = otherTile;
+                    }
+                }
+
+                if (highestReplacement != null)
+                {
+                    tiles.Add(gridPos, highestReplacement);
                 }
             }
         }
@@ -86,16 +154,6 @@ public class GridManager : MonoBehaviour
             Mathf.RoundToInt(worldPos.x),
             Mathf.RoundToInt(worldPos.z)
         );
-    }
-
-    public void UnregisterTile(Tile tile)
-    {
-        Vector2Int gridPos = WorldToGrid(tile.transform.position);
-
-        if (tiles.ContainsKey(gridPos))
-        {
-            tiles.Remove(gridPos);
-        }
     }
 
     public Tile GetHighestTileBelow(Vector3 position)
