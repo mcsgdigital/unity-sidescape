@@ -1403,6 +1403,7 @@ MonoBehaviour:
   breakClip: {fileID: 8300000, guid: 5ce6c6df29e4c4d359a92931aba5dd58, type: 3}
   teleportClip: {fileID: 8300000, guid: b3ec4210f020142b89a74e3075628aae, type: 3}
   switchClip: {fileID: 8300000, guid: b9516bdcd7b9a426bb5df0a2f63163ac, type: 3}
+  whooshClip: {fileID: 8300000, guid: 994279cf1dae34eac98a65ec0b02a444, type: 3}
 --- !u!4 &1645604381
 Transform:
   m_ObjectHideFlags: 0

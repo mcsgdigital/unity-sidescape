@@ -183,6 +183,8 @@ public class PlayerController : MonoBehaviour
                 AudioManager.Instance.PlayLand();
                 playerEffects.LandingSquatch();
 
+                Debug.Log("[Fall]Player landed on tile at " + tileBelow);
+
                 HandleTile();
 
                 yield break;
@@ -206,6 +208,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTile()
     {
+        Debug.Log("Handling");
         Tile currentTile = gridManager.GetTileAtExactHeight(
             transform.position,
             transform.position.y - 0.5f
@@ -266,16 +269,25 @@ public class PlayerController : MonoBehaviour
 
         AudioManager.Instance.PlayBreak();
 
-        // Only remove if player is no longer standing on it
-        if (gridManager.GetTileAtPosition(transform.position) == tile)
-        {
-            tile.RemoveTile();
+        Debug.Log("Breaking tile at " + tile);
 
-            StartCoroutine(Fall());
-        }
-        else
+        bool playerStandingOnTile =
+            Mathf.RoundToInt(transform.position.x) ==
+            Mathf.RoundToInt(tile.transform.position.x)
+            &&
+            Mathf.RoundToInt(transform.position.z) ==
+            Mathf.RoundToInt(tile.transform.position.z)
+            &&
+            Mathf.Abs(
+                (transform.position.y - 0.5f) -
+                tile.transform.position.y
+            ) < 0.1f;
+
+        tile.RemoveTile();
+
+        if (playerStandingOnTile)
         {
-            tile.RemoveTile();
+            StartCoroutine(Fall());
         }
     }
 

@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip breakClip;
     public AudioClip teleportClip;
     public AudioClip switchClip;
+    public AudioClip whooshClip;
 
     private void Awake()
     {
@@ -40,5 +41,10 @@ public class AudioManager : MonoBehaviour
     public void PlaySwitch()
     {
         audioSource.PlayOneShot(switchClip);
+    }
+
+    public void PlayWhoosh()
+    {
+        audioSource.PlayOneShot(whooshClip);
     }
 }

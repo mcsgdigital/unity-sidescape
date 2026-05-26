@@ -43,21 +43,6 @@ public class GridManager : MonoBehaviour
         return tiles.ContainsKey(gridPos);
     }
 
-    public Tile GetTileAtPosition(Vector3 worldPosition)
-    {
-        Vector2Int gridPos = new Vector2Int(
-            Mathf.RoundToInt(worldPosition.x),
-            Mathf.RoundToInt(worldPosition.z)
-        );
-
-        if (tiles.TryGetValue(gridPos, out Tile tile))
-        {
-            return tile;
-        }
-
-        return null;
-    }
-
     public Vector3 GetNextWorldPosition(Vector3 currentPos, Vector2Int direction)
     {
         Vector3 nextPos = currentPos + new Vector3(direction.x, 0, direction.y);
@@ -119,6 +104,9 @@ public class GridManager : MonoBehaviour
 
         foreach (Tile tile in allTiles)
         {
+            if (tile == null)
+                continue;
+
             bool sameXZ =
                 Mathf.RoundToInt(tile.transform.position.x) ==
                 Mathf.RoundToInt(position.x)

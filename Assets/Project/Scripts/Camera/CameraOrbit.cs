@@ -89,11 +89,13 @@ public class CameraOrbit : MonoBehaviour
     public void EnterInspectMode()
     {
         inspectMode = true;
+        AudioManager.Instance.PlayWhoosh();
     }
 
     public void ExitInspectMode()
     {
         inspectMode = false;
+        AudioManager.Instance.PlayWhoosh();
     }
 
     public bool IsInspecting()
