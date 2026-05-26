@@ -4911,6 +4911,7 @@ GameObject:
   - component: {fileID: 5483117122809397472}
   - component: {fileID: 5483117122809397476}
   - component: {fileID: 6129779169275180554}
+  - component: {fileID: 639927547116150715}
   m_Layer: 0
   m_Name: tile_teleport
   m_TagString: Untagged
@@ -4973,3 +4974,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedTeleport: {fileID: 0}
+--- !u!114 &639927547116150715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483117122809397502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bf7c5aaeaea4a7f8a3bb5c9328ac95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 6

@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e870d9b8cb564297b3c6ad2596a6b44, type: 2}
+  - {fileID: 2100000, guid: 492bb521e9eec4ad595b344d0a053f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5997312530505008306}
   - component: {fileID: 5997312530505008307}
   - component: {fileID: 4766415074878172718}
+  - component: {fileID: 6656000306852150770}
   m_Layer: 0
   m_Name: tile_door
   m_TagString: Untagged
@@ -156,6 +157,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
+--- !u!114 &6656000306852150770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997312530505008301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bf7c5aaeaea4a7f8a3bb5c9328ac95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 6
 --- !u!1 &7063121454443487119
 GameObject:
   m_ObjectHideFlags: 0
@@ -5020,7 +5034,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 3e870d9b8cb564297b3c6ad2596a6b44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

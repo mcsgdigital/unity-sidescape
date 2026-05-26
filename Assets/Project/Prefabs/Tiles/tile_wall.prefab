@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6861824180851692730}
   - component: {fileID: 8121852562087781064}
+  - component: {fileID: 516417149607729783}
   m_Layer: 0
   m_Name: tile_wall
   m_TagString: Untagged
@@ -141,6 +142,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 7
+--- !u!114 &516417149607729783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486204260923594469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bf7c5aaeaea4a7f8a3bb5c9328ac95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 6
 --- !u!1 &8992940696110054344
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2001385183930189548}
   - component: {fileID: 3546950105325864114}
+  - component: {fileID: 4415161266179800520}
   m_Layer: 0
   m_Name: tile-ice
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 6
+--- !u!114 &4415161266179800520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546950105325864115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bf7c5aaeaea4a7f8a3bb5c9328ac95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 6
 --- !u!1 &4049042204469062046
 GameObject:
   m_ObjectHideFlags: 0
