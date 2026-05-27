@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     private bool levelEnded;
     private FadeUI fadeUI;
     private LevelCompleteUI levelCompleteUI;
+    private UIfeedback uiFeedback;
     private int currentLevelIndex = 1;
 
     private void Awake()
@@ -14,6 +15,7 @@ public class LevelManager : MonoBehaviour
         levelEnded = false;
         fadeUI = FindObjectOfType<FadeUI>();
         levelCompleteUI = FindObjectOfType<LevelCompleteUI>();
+        uiFeedback = FindObjectOfType<UIfeedback>();
     }
 
     public void WinLevel()
@@ -46,6 +48,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(currentLevelIndex);
 
         currentLevelIndex++;
+        uiFeedback.UpdateLevelText(currentLevelIndex);
 
         if (currentLevelIndex >= SceneManager.sceneCountInBuildSettings)
         {

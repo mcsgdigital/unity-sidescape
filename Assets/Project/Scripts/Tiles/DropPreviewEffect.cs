@@ -7,22 +7,22 @@ public class DropPreviewEffect : MonoBehaviour
     [SerializeField] private float pulseDuration = 0.3f;
 
     private bool isPulsing;
-    private Renderer renderer;
+    private Renderer meshRenderer;
     private Color originalColor;
     private Color targetColor;
 
 
     private void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        originalColor = renderer.material.color;
+        meshRenderer = GetComponent<Renderer>();
+        originalColor = meshRenderer.material.color;
         targetColor = Color.white;
     }
 
     public void StopPulseEffect()
     {
         isPulsing = false;
-        renderer.material.color = originalColor;
+        meshRenderer.material.color = originalColor;
         StopAllCoroutines();
     }
 
@@ -47,7 +47,7 @@ public class DropPreviewEffect : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            renderer.material.color = Color.Lerp(
+            meshRenderer.material.color = Color.Lerp(
                 originalColor,
                 targetColor,
                 timer / pulseDuration
@@ -60,7 +60,7 @@ public class DropPreviewEffect : MonoBehaviour
         {
             timer -= Time.deltaTime;
 
-            renderer.material.color = Color.Lerp(
+            meshRenderer.material.color = Color.Lerp(
                 originalColor,
                 targetColor,
                 timer / pulseDuration
@@ -69,7 +69,7 @@ public class DropPreviewEffect : MonoBehaviour
             yield return null;
         }
 
-        renderer.material.color = originalColor;
+        meshRenderer.material.color = originalColor;
         isPulsing = false;
     }
 }
