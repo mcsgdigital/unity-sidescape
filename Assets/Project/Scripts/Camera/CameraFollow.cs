@@ -28,17 +28,17 @@ public class CameraFollow : MonoBehaviour
             smoothSpeed * Time.deltaTime
         );
 
-        // Quaternion targetRotation =
-        //     Quaternion.LookRotation(
-        //         target.position - transform.position
-        //     );
+        Quaternion targetRotation =
+            Quaternion.LookRotation(
+                target.position - transform.position
+            );
 
-        // transform.rotation =
-        //     Quaternion.Slerp(
-        //         transform.rotation,
-        //         targetRotation,
-        //         smoothSpeed * Time.deltaTime
-        //     );
+        transform.rotation =
+            Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                smoothSpeed * Time.deltaTime
+            );
     }
 
     public void SetOffset(Vector3 newOffset)
