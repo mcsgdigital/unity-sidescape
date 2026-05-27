@@ -82,6 +82,8 @@
     <Compile Include="Assets/Project/Scripts/Tiles/TileVisual.cs" />
     <Compile Include="Assets/Project/Scripts/Level/LevelManager.cs" />
     <Compile Include="Assets/Project/Scripts/UI/UIfeedback.cs" />
+    <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleEffectRotate.cs" />
+    <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleEffectExplode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
