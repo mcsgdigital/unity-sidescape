@@ -6,17 +6,21 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 5f;
 
     private Transform target;
+    private bool stopFollowing;
+
 
     private void LateUpdate()
     {
+        if (stopFollowing)
+            return;
+
         if (target == null)
         {
             FindPlayer();
             return;
         }
 
-        Vector3 desiredPosition =
-            target.position + offset;
+        Vector3 desiredPosition = target.position + offset;
 
         transform.position = Vector3.Lerp(
             transform.position,
@@ -24,17 +28,17 @@ public class CameraFollow : MonoBehaviour
             smoothSpeed * Time.deltaTime
         );
 
-        Quaternion targetRotation =
-            Quaternion.LookRotation(
-                target.position - transform.position
-            );
+        // Quaternion targetRotation =
+        //     Quaternion.LookRotation(
+        //         target.position - transform.position
+        //     );
 
-        transform.rotation =
-            Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                smoothSpeed * Time.deltaTime
-            );
+        // transform.rotation =
+        //     Quaternion.Slerp(
+        //         transform.rotation,
+        //         targetRotation,
+        //         smoothSpeed * Time.deltaTime
+        //     );
     }
 
     public void SetOffset(Vector3 newOffset)
@@ -51,5 +55,15 @@ public class CameraFollow : MonoBehaviour
         {
             target = player.transform;
         }
+    }
+
+    public void StopFollowing()
+    {
+        stopFollowing = true;
+    }
+
+    public void StartFollowing()
+    {
+        stopFollowing = false;
     }
 }

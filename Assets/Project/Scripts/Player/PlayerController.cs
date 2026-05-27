@@ -189,15 +189,20 @@ public class PlayerController : MonoBehaviour
             }
 
             // Fell too far = death
-            if (transform.position.y < -10f)
+            if (transform.position.y < -10f &&
+                currentState != PlayerState.Dead)
             {
                 currentState = PlayerState.Dead;
 
-                yield return new WaitForSeconds(0.5f);
+                CameraFollow cam =
+                    FindObjectOfType<CameraFollow>();
 
-                levelManager.LoseLevel();
+                if (cam != null)
+                {
+                    cam.StopFollowing();
+                }
 
-                yield break;
+                StartCoroutine(HandleDeath());
             }
 
             yield return null;
@@ -395,6 +400,13 @@ public class PlayerController : MonoBehaviour
     public bool IsIdle()
     {
         return currentState == PlayerState.Idle;
+    }
+
+    private IEnumerator HandleDeath()
+    {
+        yield return new WaitForSeconds(1f);
+
+        levelManager.LoseLevel();
     }
 
 }

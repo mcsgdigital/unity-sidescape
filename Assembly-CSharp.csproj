@@ -60,27 +60,27 @@
     <Compile Include="Assets/Project/Scripts/System/BootstrapLoader.cs" />
     <Compile Include="Assets/Project/Scripts/Input/CubeInputActions.cs" />
     <Compile Include="Assets/Project/Scripts/Tiles/SwitchTile.cs" />
+    <Compile Include="Assets/Project/Scripts/Tiles/DropPreviewEffect.cs" />
     <Compile Include="Assets/Project/Scripts/Camera/CameraShake.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/LayerVisibilityManager.cs" />
     <Compile Include="Assets/Project/Scripts/UI/FadeUI.cs" />
     <Compile Include="Assets/Project/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Project/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Project/Scripts/Level/LevelCompleteUI.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/DropPreview.cs" />
     <Compile Include="Assets/Project/Scripts/Grid/GridManager.cs" />
     <Compile Include="Assets/Project/Scripts/Tiles/IceTile.cs" />
+    <Compile Include="Assets/Project/Scripts/Grid/DropPreviewManager.cs" />
     <Compile Include="Assets/Project/Scripts/Camera/CameraFollow.cs" />
     <Compile Include="Assets/Project/Scripts/Tiles/Tile.cs" />
     <Compile Include="Assets/Project/Scripts/Input/SwipeDetector.cs" />
     <Compile Include="Assets/Project/Scripts/Player/PlayerEffects.cs" />
     <Compile Include="Assets/Project/Scripts/Tiles/TileType.cs" />
     <Compile Include="Assets/Project/Scripts/Tiles/Door.cs" />
-    <Compile Include="Assets/Project/Scripts/Tiles/TileTeleport.cs" />
-    <Compile Include="Assets/Project/Scripts/Level/LevelManager.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/DropPreview.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/DropPreviewManager.cs" />
-    <Compile Include="Assets/Project/Scripts/Tiles/DropPreviewEffect.cs" />
-    <Compile Include="Assets/Project/Scripts/Tiles/TileVisual.cs" />
-    <Compile Include="Assets/Project/Scripts/Grid/LayerVisibilityManager.cs" />
     <Compile Include="Assets/Project/Scripts/Camera/CameraOrbit.cs" />
+    <Compile Include="Assets/Project/Scripts/Tiles/TileTeleport.cs" />
+    <Compile Include="Assets/Project/Scripts/Tiles/TileVisual.cs" />
+    <Compile Include="Assets/Project/Scripts/Level/LevelManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

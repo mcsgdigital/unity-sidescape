@@ -79,6 +79,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(fadeUI.FadeIn());
 
         levelEnded = false;
+        Camera.main.GetComponent<CameraFollow>().StartFollowing();
     }
 
     public void RestartCurrentLevel()
