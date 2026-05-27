@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HandleDisappearingTile(Tile tile)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         AudioManager.Instance.PlayBreak();
 
