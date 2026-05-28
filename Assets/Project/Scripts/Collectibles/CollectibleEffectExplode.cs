@@ -12,7 +12,7 @@ public class CollectibleEffectExplode : MonoBehaviour
         explosionEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
-    public void PlayExplosionEffect()
+    private void PlayExplosionEffect()
     {
         explosionEffect.Play();
 
@@ -24,6 +24,7 @@ public class CollectibleEffectExplode : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayExplosionEffect();
+            LevelManager.Instance.CollectGem();
         }
     }
 

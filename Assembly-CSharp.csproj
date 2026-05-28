@@ -84,6 +84,7 @@
     <Compile Include="Assets/Project/Scripts/UI/UIfeedback.cs" />
     <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleEffectRotate.cs" />
     <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleEffectExplode.cs" />
+    <Compile Include="Assets/Project/Scripts/UI/ViewEndOfLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

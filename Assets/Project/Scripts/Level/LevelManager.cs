@@ -4,17 +4,31 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public int totalGemsCollected = 0;
+
+    public static LevelManager Instance { get; private set; }
+
     private bool levelEnded;
     private FadeUI fadeUI;
     private LevelCompleteUI levelCompleteUI;
     private UIfeedback uiFeedback;
     private int currentLevelIndex = 1;
 
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         levelEnded = false;
         fadeUI = FindObjectOfType<FadeUI>();
         levelCompleteUI = FindObjectOfType<LevelCompleteUI>();
+        levelCompleteUI.HideEndOfLevel();
         uiFeedback = FindObjectOfType<UIfeedback>();
     }
 
@@ -25,7 +39,7 @@ public class LevelManager : MonoBehaviour
         levelEnded = true;
         levelCompleteUI.Show();
 
-        StartCoroutine(LoadNextLevel());
+        StartCoroutine(ShowEndOfLevelResult());
     }
 
     public void LoseLevel()
@@ -39,8 +53,26 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(RestartLevel());
     }
 
+    public void HandleEndOfLevelButtonOK()
+    {
+        StartCoroutine(LoadNextLevel());
+    }
+
+    private IEnumerator ShowEndOfLevelResult()
+    {
+        yield return StartCoroutine(fadeUI.FadeOutToAlpha(0.5f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        levelCompleteUI.ShowEndOfLevel();
+        // TODO: Later add some animation to show the end of level result. Example: gems collected to fly to the gems counter in the UI
+        uiFeedback.UpdateGemsText(totalGemsCollected);
+    }
+
     private IEnumerator LoadNextLevel()
     {
+        levelCompleteUI.HideEndOfLevel();
+
         yield return StartCoroutine(fadeUI.FadeOut());
 
         yield return new WaitForSeconds(0.2f);
@@ -92,5 +124,10 @@ public class LevelManager : MonoBehaviour
         levelEnded = true;
 
         StartCoroutine(RestartLevel());
+    }
+
+    public void CollectGem()
+    {
+        totalGemsCollected++;
     }
 }

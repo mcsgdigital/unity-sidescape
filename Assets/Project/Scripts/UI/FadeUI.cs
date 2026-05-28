@@ -14,7 +14,7 @@ public class FadeUI : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
-        float timer = 0f;
+        float timer = fadeImage.color.a * fadeDuration;
 
         while (timer < fadeDuration)
         {
@@ -46,6 +46,25 @@ public class FadeUI : MonoBehaviour
         }
 
         SetAlpha(0f);
+    }
+
+    public IEnumerator FadeOutToAlpha(float targetAlpha)
+    {
+        float timer = 0f;
+        float startAlpha = fadeImage.color.a;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, timer / fadeDuration);
+
+            SetAlpha(alpha);
+
+            yield return null;
+        }
+
+        SetAlpha(targetAlpha);
     }
 
     private void SetAlpha(float alpha)
