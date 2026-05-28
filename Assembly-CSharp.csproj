@@ -85,6 +85,11 @@
     <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleEffectRotate.cs" />
     <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleEffectExplode.cs" />
     <Compile Include="Assets/Project/Scripts/UI/ViewEndOfLevel.cs" />
+    <Compile Include="Assets/Project/Scripts/UI/LevelSelect/LevelData.cs" />
+    <Compile Include="Assets/Project/Scripts/UI/LevelSelect/LevelDatabase.cs" />
+    <Compile Include="Assets/Project/Scripts/UI/LevelSelect/LevelButtonUI.cs" />
+    <Compile Include="Assets/Project/Scripts/UI/LevelSelect/LevelSelectUI.cs" />
+    <Compile Include="Assets/Project/Scripts/UI/CanvasManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
