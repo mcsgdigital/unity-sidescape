@@ -13,6 +13,9 @@ public class SwipeDetector : MonoBehaviour
     private PlayerController player;
     private Camera mainCamera;
 
+    private CanvasManager canvasManager;
+
+
     private void Awake()
     {
         inputActions = new CubeInputActions();
@@ -22,6 +25,9 @@ public class SwipeDetector : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+
+        canvasManager =
+        FindObjectOfType<CanvasManager>();
     }
 
     private void OnEnable()
@@ -51,6 +57,12 @@ public class SwipeDetector : MonoBehaviour
 
     private void DetectSwipe()
     {
+        if (canvasManager != null &&
+            canvasManager.IsOpen())
+        {
+            return;
+        }
+
         Vector2 delta = endPosition - startPosition;
 
         if (delta.magnitude < minSwipeDistance)

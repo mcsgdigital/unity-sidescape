@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    public Transform LevelSelectWindow;
+    [SerializeField] private GameObject LevelSelectWindow;
+
+    private bool isOpen_levelMapWindow = false;
+
 
     private void Awake()
     {
@@ -15,11 +18,18 @@ public class CanvasManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         LevelSelectWindow.gameObject.SetActive(true);
+        isOpen_levelMapWindow = true;
     }
 
     public void CloseLevelSelect()
     {
         Time.timeScale = 1f;
         LevelSelectWindow.gameObject.SetActive(false);
+        isOpen_levelMapWindow = false;
+    }
+
+    public bool IsOpen()
+    {
+        return isOpen_levelMapWindow;
     }
 }

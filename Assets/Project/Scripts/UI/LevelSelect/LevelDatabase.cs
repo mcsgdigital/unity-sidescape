@@ -15,7 +15,7 @@ public class LevelDatabase : MonoBehaviour
             Instance = this;
         }
 
-        GenerateTestData();
+        // GenerateTestData();
     }
 
     private void GenerateTestData()

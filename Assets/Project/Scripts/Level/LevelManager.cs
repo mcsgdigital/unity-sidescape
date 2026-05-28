@@ -158,4 +158,35 @@ public class LevelManager : MonoBehaviour
     {
         currentLevelTotalGems = GameObject.FindGameObjectsWithTag("Gem").Length;
     }
+
+    public void HandleLevelSelect(int levelIndex)
+    {
+        if (levelEnded) return;
+
+        levelEnded = true;
+
+        StartCoroutine(LoadSelectedLevel(levelIndex));
+    }
+
+    private IEnumerator LoadSelectedLevel(int levelIndex)
+    {
+        yield return StartCoroutine(fadeUI.FadeOut());
+
+        ClearVariables();
+
+        yield return new WaitForSeconds(0.2f);
+
+        SceneManager.UnloadSceneAsync(currentLevelIndex);
+
+        currentLevelIndex = levelIndex;
+        uiFeedback.UpdateLevelText(currentLevelIndex);
+
+        SceneManager.LoadScene(currentLevelIndex, LoadSceneMode.Additive);
+
+        yield return new WaitForSeconds(0.1f);
+
+        StartCoroutine(fadeUI.FadeIn());
+
+        levelEnded = false;
+    }
 }

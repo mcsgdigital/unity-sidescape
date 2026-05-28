@@ -45,9 +45,9 @@ public class LevelButtonUI : MonoBehaviour
 
             playButton.onClick.AddListener(() =>
             {
-                Debug.Log(
-                    "Load level " + data.levelIndex
-                );
+                CanvasManager canvasManager = FindObjectOfType<CanvasManager>();
+                canvasManager.CloseLevelSelect();
+                LevelManager.Instance.HandleLevelSelect(data.levelIndex);
             });
         }
         else

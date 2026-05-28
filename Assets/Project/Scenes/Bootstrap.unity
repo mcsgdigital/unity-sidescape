@@ -152,7 +152,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6bc93d0a5174b5a966deef569c4504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels: []
+  levels:
+  - levelIndex: 1
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 3
+    bestGrade: 3
+    unlockRequirement: Amazing!
+  - levelIndex: 2
+    unlocked: 1
+    gemsCollected: 3
+    totalGems: 3
+    bestGrade: 5
+    unlockRequirement: Perfect!
+  - levelIndex: 3
+    unlocked: 1
+    gemsCollected: 2
+    totalGems: 5
+    bestGrade: 1
+    unlockRequirement: Good!
+  - levelIndex: 4
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 5
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 6
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 7
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 8
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 9
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 10
+    unlocked: 1
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 11
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
+  - levelIndex: 12
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: 
 --- !u!4 &63335661
 Transform:
   m_ObjectHideFlags: 0
@@ -1547,7 +1619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56b3acdd1de94b239c3b4ca31c5bfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelSelectWindow: {fileID: 1466730471}
+  LevelSelectWindow: {fileID: 1466730470}
 --- !u!1 &916790586
 GameObject:
   m_ObjectHideFlags: 0
