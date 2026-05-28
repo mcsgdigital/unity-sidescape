@@ -208,23 +208,83 @@ MonoBehaviour:
     bestGrade: 0
     unlockRequirement: 
   - levelIndex: 10
-    unlocked: 1
+    unlocked: 0
     gemsCollected: 0
     totalGems: 0
     bestGrade: 0
-    unlockRequirement: 
+    unlockRequirement: Beat previous 9 levels
   - levelIndex: 11
     unlocked: 0
     gemsCollected: 0
     totalGems: 0
     bestGrade: 0
-    unlockRequirement: 
+    unlockRequirement: Collect 20 relics
   - levelIndex: 12
     unlocked: 0
     gemsCollected: 0
     totalGems: 0
     bestGrade: 0
-    unlockRequirement: 
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 13
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 14
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 15
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 16
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 17
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 18
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 19
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 20 relics
+  - levelIndex: 20
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Beat previous 9 levels
+  - levelIndex: 21
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 40 relics
+  - levelIndex: 22
+    unlocked: 0
+    gemsCollected: 0
+    totalGems: 0
+    bestGrade: 0
+    unlockRequirement: Collect 40 relics
 --- !u!4 &63335661
 Transform:
   m_ObjectHideFlags: 0
