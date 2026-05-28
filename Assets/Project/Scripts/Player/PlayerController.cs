@@ -223,6 +223,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentTile.OnPlayerEnter(this);
+        levelManager.currentLevelTotalStepsTaken++;
 
         switch (currentTile.tileType)
         {

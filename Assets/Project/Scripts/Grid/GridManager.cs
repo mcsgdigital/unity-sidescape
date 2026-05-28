@@ -8,12 +8,14 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
+        LevelManager.Instance.SetCurrentLevelTotalGems();
         RegisterTiles();
     }
 
     private void RegisterTiles()
     {
         Tile[] foundTiles = FindObjectsOfType<Tile>();
+        LevelManager.Instance.SetCurrentLevelTotalTiles(foundTiles.Length);
 
         foreach (Tile tile in foundTiles)
         {

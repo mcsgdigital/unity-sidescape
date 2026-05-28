@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public int totalGemsCollected = 0;
+    public int currentLevelTotalGems = 0;
+    public int currentLevelTotalGemsCollected = 0;
+    public int currentLevelTotalStepsTaken = 0;
+    public int currentLevelTotalTiles = 0;
 
     public static LevelManager Instance { get; private set; }
 
@@ -66,12 +69,13 @@ public class LevelManager : MonoBehaviour
 
         levelCompleteUI.ShowEndOfLevel();
         // TODO: Later add some animation to show the end of level result. Example: gems collected to fly to the gems counter in the UI
-        uiFeedback.UpdateGemsText(totalGemsCollected);
+        uiFeedback.UpdateGemsText(currentLevelTotalGemsCollected);
     }
 
     private IEnumerator LoadNextLevel()
     {
         levelCompleteUI.HideEndOfLevel();
+        ClearVariables();
 
         yield return StartCoroutine(fadeUI.FadeOut());
 
@@ -101,6 +105,8 @@ public class LevelManager : MonoBehaviour
     {
         yield return StartCoroutine(fadeUI.FadeOut());
 
+        ClearVariables();
+
         yield return new WaitForSeconds(0.2f);
 
         SceneManager.UnloadSceneAsync(currentLevelIndex);
@@ -128,6 +134,28 @@ public class LevelManager : MonoBehaviour
 
     public void CollectGem()
     {
-        totalGemsCollected++;
+        currentLevelTotalGemsCollected++;
+    }
+
+    public void TakeStep()
+    {
+        currentLevelTotalStepsTaken++;
+    }
+
+    public void SetCurrentLevelTotalTiles(int totalTiles)
+    {
+        currentLevelTotalTiles = totalTiles;
+    }
+
+    public void ClearVariables()
+    {
+        currentLevelTotalGemsCollected = 0;
+        currentLevelTotalStepsTaken = 0;
+        currentLevelTotalTiles = 0;
+    }
+
+    public void SetCurrentLevelTotalGems()
+    {
+        currentLevelTotalGems = GameObject.FindGameObjectsWithTag("Gem").Length;
     }
 }
