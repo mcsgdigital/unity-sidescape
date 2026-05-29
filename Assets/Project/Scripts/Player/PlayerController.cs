@@ -225,6 +225,8 @@ public class PlayerController : MonoBehaviour
         currentTile.OnPlayerEnter(this);
         levelManager.currentLevelTotalStepsTaken++;
 
+        playerEffects.DeactivateShield();
+
         switch (currentTile.tileType)
         {
             case TileType.Normal:
@@ -262,6 +264,10 @@ public class PlayerController : MonoBehaviour
             case TileType.Door:
                 currentState = PlayerState.Idle;
                 TryConsumeBufferedInput();
+                break;
+
+            case TileType.Death:
+                HandleDeathTile();
                 break;
         }
     }
@@ -408,6 +414,22 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         levelManager.LoseLevel();
+    }
+
+    private void HandleDeathTile()
+    {
+        if (LevelManager.Instance.currentLevelTotalChargeCollected == 0)
+        {
+            currentState = PlayerState.Dead;
+            StartCoroutine(HandleDeath());
+        }
+        else
+        {
+            currentState = PlayerState.Idle;
+            playerEffects.ActivateShield();
+            LevelManager.Instance.SpendCharge();
+            TryConsumeBufferedInput();
+        }
     }
 
 }

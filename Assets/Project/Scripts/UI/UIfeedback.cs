@@ -8,11 +8,13 @@ public class UIfeedback : MonoBehaviour
 {
     public TextMeshProUGUI text_LEVEL;
     public TextMeshProUGUI text_GEMS;
+    public TextMeshProUGUI text_CHARGES;
 
     private void Start()
     {
         UpdateLevelText(1);
-        UpdateGemsText(0);
+
+        ResetVariables();
     }
 
     public void UpdateLevelText(int level)
@@ -23,5 +25,16 @@ public class UIfeedback : MonoBehaviour
     public void UpdateGemsText(int gems)
     {
         text_GEMS.text = $"{gems}";
+    }
+
+    public void UpdateChargesText(int charges)
+    {
+        text_CHARGES.text = $"{charges}";
+    }
+
+    public void ResetVariables()
+    {
+        UpdateGemsText(0);
+        UpdateChargesText(0);
     }
 }

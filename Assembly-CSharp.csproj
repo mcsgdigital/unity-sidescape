@@ -90,6 +90,9 @@
     <Compile Include="Assets/Project/Scripts/UI/LevelSelect/LevelButtonUI.cs" />
     <Compile Include="Assets/Project/Scripts/UI/LevelSelect/LevelSelectUI.cs" />
     <Compile Include="Assets/Project/Scripts/UI/CanvasManager.cs" />
+    <Compile Include="Assets/Project/Scripts/Enemies/EnemyController.cs" />
+    <Compile Include="Assets/Project/Scripts/Enemies/EnemyMoveType1.cs" />
+    <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

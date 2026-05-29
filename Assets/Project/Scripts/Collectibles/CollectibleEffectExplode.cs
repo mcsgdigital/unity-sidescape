@@ -24,7 +24,6 @@ public class CollectibleEffectExplode : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayExplosionEffect();
-            LevelManager.Instance.CollectGem();
         }
     }
 

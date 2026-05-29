@@ -7,5 +7,6 @@ public enum TileType
     Door,
     Switch,
     Ice,
-    Wall
+    Wall,
+    Death
 }

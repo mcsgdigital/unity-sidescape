@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerEffects : MonoBehaviour
 {
+    [SerializeField] private Transform shield;
+
+
+    private void Awake()
+    {
+        DeactivateShield();
+    }
+
     public void LandingSquatch()
     {
         StartCoroutine(LandingSquatchRoutine());
@@ -44,5 +52,15 @@ public class PlayerEffects : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void ActivateShield()
+    {
+        shield.gameObject.SetActive(true);
+    }
+
+    public void DeactivateShield()
+    {
+        shield.gameObject.SetActive(false);
     }
 }

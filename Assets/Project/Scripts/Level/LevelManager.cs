@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public int currentLevelTotalGems = 0;
     public int currentLevelTotalGemsCollected = 0;
+    public int currentLevelTotalChargeCollected = 0;
     public int currentLevelTotalStepsTaken = 0;
     public int currentLevelTotalTiles = 0;
 
@@ -137,6 +138,18 @@ public class LevelManager : MonoBehaviour
         currentLevelTotalGemsCollected++;
     }
 
+    public void CollectCharge()
+    {
+        currentLevelTotalChargeCollected++;
+        uiFeedback.UpdateChargesText(currentLevelTotalChargeCollected);
+    }
+
+    public void SpendCharge()
+    {
+        currentLevelTotalChargeCollected--;
+        uiFeedback.UpdateChargesText(currentLevelTotalChargeCollected);
+    }
+
     public void TakeStep()
     {
         currentLevelTotalStepsTaken++;
@@ -150,8 +163,11 @@ public class LevelManager : MonoBehaviour
     public void ClearVariables()
     {
         currentLevelTotalGemsCollected = 0;
+        currentLevelTotalChargeCollected = 0;
         currentLevelTotalStepsTaken = 0;
         currentLevelTotalTiles = 0;
+
+        uiFeedback.ResetVariables();
     }
 
     public void SetCurrentLevelTotalGems()
