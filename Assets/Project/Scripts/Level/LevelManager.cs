@@ -84,7 +84,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(currentLevelIndex);
 
         currentLevelIndex++;
-        uiFeedback.UpdateLevelText(currentLevelIndex);
+        UserData.Instance.currentLevel = currentLevelIndex;
+        uiFeedback.UpdateLevelText();
 
         if (currentLevelIndex >= SceneManager.sceneCountInBuildSettings)
         {
@@ -202,7 +203,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(currentLevelIndex);
 
         currentLevelIndex = levelIndex;
-        uiFeedback.UpdateLevelText(currentLevelIndex);
+        UserData.Instance.currentLevel = currentLevelIndex;
+        uiFeedback.UpdateLevelText();
 
         SceneManager.LoadScene(currentLevelIndex, LoadSceneMode.Additive);
 

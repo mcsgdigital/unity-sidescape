@@ -12,14 +12,14 @@ public class UIfeedback : MonoBehaviour
 
     private void Start()
     {
-        UpdateLevelText(1);
+        UpdateLevelText();
 
         UpdateTexts();
     }
 
-    public void UpdateLevelText(int level)
+    public void UpdateLevelText()
     {
-        text_LEVEL.text = $"LV {level}";
+        text_LEVEL.text = $"LV {UserData.Instance.currentLevel}";
     }
 
     public void UpdateGemsText()

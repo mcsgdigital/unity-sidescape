@@ -6,6 +6,7 @@ public class UserData : MonoBehaviour
 {
     public static UserData Instance { get; private set; }
 
+    public int currentLevel = 1;
     public int gemsCollected = 0; // player overall collected gems.
     public int chargeCollected = 0;
 
