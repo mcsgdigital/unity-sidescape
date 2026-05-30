@@ -93,6 +93,7 @@
     <Compile Include="Assets/Project/Scripts/Enemies/EnemyController.cs" />
     <Compile Include="Assets/Project/Scripts/Enemies/EnemyMoveType1.cs" />
     <Compile Include="Assets/Project/Scripts/Collectibles/CollectibleController.cs" />
+    <Compile Include="Assets/Project/Scripts/Core/UserData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

@@ -52,7 +52,8 @@ public class LevelManager : MonoBehaviour
 
         levelEnded = true;
 
-        Debug.Log("LEVEL FAILED");
+        ResetVariables();
+        ClearVariables();
 
         StartCoroutine(RestartLevel());
     }
@@ -69,8 +70,6 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         levelCompleteUI.ShowEndOfLevel();
-        // TODO: Later add some animation to show the end of level result. Example: gems collected to fly to the gems counter in the UI
-        uiFeedback.UpdateGemsText(currentLevelTotalGemsCollected);
     }
 
     private IEnumerator LoadNextLevel()
@@ -106,8 +105,6 @@ public class LevelManager : MonoBehaviour
     {
         yield return StartCoroutine(fadeUI.FadeOut());
 
-        ClearVariables();
-
         yield return new WaitForSeconds(0.2f);
 
         SceneManager.UnloadSceneAsync(currentLevelIndex);
@@ -118,6 +115,7 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
+        uiFeedback.UpdateTexts();
         StartCoroutine(fadeUI.FadeIn());
 
         levelEnded = false;
@@ -130,24 +128,30 @@ public class LevelManager : MonoBehaviour
 
         levelEnded = true;
 
+        ResetVariables();
+        ClearVariables();
         StartCoroutine(RestartLevel());
     }
 
     public void CollectGem()
     {
         currentLevelTotalGemsCollected++;
+        UserData.Instance.gemsCollected++;
+        uiFeedback.UpdateGemsText();
     }
 
     public void CollectCharge()
     {
         currentLevelTotalChargeCollected++;
-        uiFeedback.UpdateChargesText(currentLevelTotalChargeCollected);
+        UserData.Instance.chargeCollected++;
+        uiFeedback.UpdateChargesText();
     }
 
     public void SpendCharge()
     {
         currentLevelTotalChargeCollected--;
-        uiFeedback.UpdateChargesText(currentLevelTotalChargeCollected);
+        UserData.Instance.chargeCollected--;
+        uiFeedback.UpdateChargesText();
     }
 
     public void TakeStep()
@@ -160,14 +164,19 @@ public class LevelManager : MonoBehaviour
         currentLevelTotalTiles = totalTiles;
     }
 
+    public void ResetVariables()
+    {
+        // When the player loses or restarts the level, we need to clear the collected gems and charge for the current level from the overall player data, so that when they restart the level, they start with 0 collected gems and charge for that level.
+        UserData.Instance.gemsCollected -= currentLevelTotalGemsCollected;
+        UserData.Instance.chargeCollected -= currentLevelTotalChargeCollected;
+    }
+
     public void ClearVariables()
     {
         currentLevelTotalGemsCollected = 0;
         currentLevelTotalChargeCollected = 0;
         currentLevelTotalStepsTaken = 0;
         currentLevelTotalTiles = 0;
-
-        uiFeedback.ResetVariables();
     }
 
     public void SetCurrentLevelTotalGems()
@@ -187,8 +196,6 @@ public class LevelManager : MonoBehaviour
     private IEnumerator LoadSelectedLevel(int levelIndex)
     {
         yield return StartCoroutine(fadeUI.FadeOut());
-
-        ClearVariables();
 
         yield return new WaitForSeconds(0.2f);
 

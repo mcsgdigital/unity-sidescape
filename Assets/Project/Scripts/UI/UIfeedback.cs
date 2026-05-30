@@ -14,7 +14,7 @@ public class UIfeedback : MonoBehaviour
     {
         UpdateLevelText(1);
 
-        ResetVariables();
+        UpdateTexts();
     }
 
     public void UpdateLevelText(int level)
@@ -22,19 +22,19 @@ public class UIfeedback : MonoBehaviour
         text_LEVEL.text = $"LV {level}";
     }
 
-    public void UpdateGemsText(int gems)
+    public void UpdateGemsText()
     {
-        text_GEMS.text = $"{gems}";
+        text_GEMS.text = $"{UserData.Instance.gemsCollected}";
     }
 
-    public void UpdateChargesText(int charges)
+    public void UpdateChargesText()
     {
-        text_CHARGES.text = $"{charges}";
+        text_CHARGES.text = $"{UserData.Instance.chargeCollected}";
     }
 
-    public void ResetVariables()
+    public void UpdateTexts()
     {
-        UpdateGemsText(0);
-        UpdateChargesText(0);
+        UpdateGemsText();
+        UpdateChargesText();
     }
 }
